@@ -1,0 +1,12 @@
+.env
+.DS_Store
+.idea
+
+_mock
+logs
+__test__
+_routes
+
+.ice
+**.log
+

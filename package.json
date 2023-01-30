@@ -1,0 +1,19 @@
+{
+  "name": "@serverless-cd/config",
+  "version": "0.0.1",
+  "description": "serverless cd 项目配置文件处理",
+  "main": "index.js",
+  "keywords": [
+    "serverless-cd",
+    "config"
+  ],
+  "scripts": {},
+  "author": "wss-git <wssgryx@163.com>",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2"
+  }
+}
