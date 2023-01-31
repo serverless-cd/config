@@ -7,7 +7,7 @@ const {
   GITHUB_REDIRECT_URI,
   // 创建 webhook 的回调地址
   WEBHOOK_URL,
-  // 用于调用函数计算函数，需要用到的点：重新部署、使用了 OTS、读 TASK
+  // 阿里云密钥
   ACCOUNT_ID,
   ACCESS_KEY_ID,
   ACCESS_KEY_SECRET,
@@ -19,7 +19,7 @@ const {
   // 运行engine的函数名称
   WORKER_FUNCTION_NAME,
   // JWT 鉴权 Token
-  COOKIE_SECRET: JWT_SECRET,
+  JWT_SECRET,
   // 配置文件
   CD_PIPELINE_YAML = 'serverless-pipeline.yaml',
 } = process.env;
@@ -41,7 +41,21 @@ const TABLE = {
   APPLICATION: 'application',
 };
 
-const constants = {
+const supportGithubLogin = !(
+  !GITHUB_CLIENT_ID ||
+  GITHUB_CLIENT_ID.startsWith('${env.') ||
+  !GITHUB_CLIENT_SECRET ||
+  GITHUB_CLIENT_SECRET.startsWith('${env.')
+);
+
+const UID_TOKEN = '1234567890abcdefghijklmnopqrstuvwxyz';
+const UID_TOKEN_UPPERCASE = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+module.exports = {
+  // uid 生成 token 字段
+  UID_TOKEN,
+  // uid 生成 token 字段（包含大写）
+  UID_TOKEN_UPPERCASE,
   // 用户在组织的角色
   ROLE,
   // 支持代码仓库
@@ -60,32 +74,26 @@ const constants = {
   WEBHOOK_EVENTS: ['push', 'pull_request'],
   // 不验证登陆的路由
   EXCLUDE_AUTH_URL: ['/auth/login', '/auth/signUp'],
-};
-
-const supportGithubLogin = !(
-  !GITHUB_CLIENT_ID ||
-  GITHUB_CLIENT_ID.startsWith('${env.') ||
-  !GITHUB_CLIENT_SECRET ||
-  GITHUB_CLIENT_SECRET.startsWith('${env.')
-);
-
-module.exports = {
-  ...constants,
+  // 用于支持 github 登陆
   GITHUB: {
     clientId: GITHUB_CLIENT_ID,
     secret: GITHUB_CLIENT_SECRET,
     redirectUrl: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`
   },
+  // 创建 webhook 的回调地址
   WEBHOOK_URL: WEBHOOK_URL || `http://${process.env.DOMAIN}`,
+  // 用于和阿里云交互，需要用到的点：重新部署、使用了 OTS、读 TASK
   CREDENTIALS: {
     accountId: ACCOUNT_ID,
     accessKeyId: ACCESS_KEY_ID,
     accessKeySecret: ACCESS_KEY_SECRET,
   },
+  // OSS 配置
   OSS_CONFIG: {
     bucket: OSS_BUCKET,
     region: `oss-${REGION}`,
   },
+  // FC 配置
   FC: {
     workerFunction: {
       region: REGION,
@@ -93,6 +101,7 @@ module.exports = {
       functionName: WORKER_FUNCTION_NAME,
     },
   },
+  // 支持的登陆方式
   SUPPORT_LOGIN: {
     github: supportGithubLogin,
     account: true,
