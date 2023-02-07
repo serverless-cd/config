@@ -12,6 +12,7 @@ const {
   ACCOUNT_ID,
   ACCESS_KEY_ID,
   ACCESS_KEY_SECRET,
+  SECURITY_TOKEN,
   // 查询 Task 存储在 OSS 的日志
   OSS_BUCKET,
   // 函数部署的地区和服务名称
@@ -110,6 +111,7 @@ module.exports = {
     accountId: ACCOUNT_ID,
     accessKeyId: ACCESS_KEY_ID,
     accessKeySecret: ACCESS_KEY_SECRET,
+    securityToken: SECURITY_TOKEN,
   },
   // OSS 配置
   OSS_CONFIG: {

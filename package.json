@@ -1,6 +1,6 @@
 {
   "name": "@serverless-cd/config",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "serverless cd 项目配置文件处理",
   "main": "index.js",
   "keywords": [
