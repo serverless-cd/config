@@ -1,3 +1,4 @@
+const os = require('os');
 require('./env');
 
 const {
@@ -22,6 +23,9 @@ const {
   JWT_SECRET,
   // 配置文件
   CD_PIPELINE_YAML = 'serverless-pipeline.yaml',
+  DOWNLOAD_CODE_DIR = os.tmpdir(),
+  // 链接数据库
+  DATABASE_URL,
 } = process.env;
 
 const ROLE = {
@@ -48,10 +52,25 @@ const supportGithubLogin = !(
   GITHUB_CLIENT_SECRET.startsWith('${env.')
 );
 
+const DEFAULT_UNSET_ENVS = [
+  "DATABASE_URL",
+  "JWT_SECRET",
+  'CD_PIPELINE_YAML',
+  'DOWNLOAD_CODE_DIR',
+  'GITHUB_CLIENT_ID',
+  'GITHUB_CLIENT_SECRET',
+  'ACCOUNT_ID',
+  'ACCESS_KEY_ID',
+  'ACCESS_KEY_SECRET',
+  'OSS_BUCKET',
+  'REGION',
+];
+
 const UID_TOKEN = '1234567890abcdefghijklmnopqrstuvwxyz';
 const UID_TOKEN_UPPERCASE = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 module.exports = {
+  DATABASE_URL,
   // uid 生成 token 字段
   UID_TOKEN,
   // uid 生成 token 字段（包含大写）
@@ -64,6 +83,10 @@ module.exports = {
   TABLE,
   // cd 的 pipeline 文件名称
   CD_PIPELINE_YAML,
+  // 下载代码本地路径
+  DOWNLOAD_CODE_DIR,
+  // 需要 unset 的字段
+  DEFAULT_UNSET_ENVS,
   // 组织拥有者字段枚举
   OWNER_ROLE_KEYS: [ROLE.OWNER],
   // 组织管理者字段枚举
