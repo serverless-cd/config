@@ -97,7 +97,7 @@ module.exports = {
   // webhook 事件支持
   WEBHOOK_EVENTS: ['push', 'pull_request'],
   // 不验证登陆的路由
-  EXCLUDE_AUTH_URL: ['/auth/login', '/auth/signUp'],
+  EXCLUDE_AUTH_URL: ['/', '/auth/login', '/auth/signUp'],
   // 用于支持 github 登陆
   GITHUB: {
     clientId: GITHUB_CLIENT_ID,
