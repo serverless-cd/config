@@ -18,9 +18,13 @@ if (fs.existsSync(envPath)) {
 const envs = transformEnv();
 const { REGION, SERVICE_NAME, WORKER_FUNCTION_NAME, OSS_BUCKET, ACCOUNT_ID, ACCESS_KEY_ID, ACCESS_KEY_SECRET, SECURITY_TOKEN, GITHUB_REDIRECT_URI, SESSION_EXPIRATION } = envs;
 
+// 判断是否支持 github 登陆
 const supportGithubLogin = !!(envs.GITHUB_CLIENT_ID && envs.GITHUB_CLIENT_SECRET);
-const ossConfig = OSS_BUCKET ? { bucket: OSS_BUCKET, region: `oss-${REGION}` } : undefined;
+// github 登陆的授权回调地址
 const redirectUrl = supportGithubLogin ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}` : undefined;
+// 是否存在 oss 配置
+const ossConfig = OSS_BUCKET ? { bucket: OSS_BUCKET, region: `oss-${REGION}` } : undefined;
+// jwt 过期时间
 const expiration = SESSION_EXPIRATION ? Number(SESSION_EXPIRATION) : 7 * 24 * 60 * 60 * 1000;
 
 // 将已经组合的字段从配置中删除

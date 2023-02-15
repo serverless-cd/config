@@ -49,5 +49,4 @@ REGION: 函数部署的地区
 OSS_BUCKET: oss 支持，目前是投递日志到 oss
 SERVICE_NAME: 部署到函数计算的服务名称
 WORKER_FUNCTION_NAME: 运行 engine 的函数名称, worker
-
 ```
