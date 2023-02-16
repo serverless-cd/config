@@ -16,7 +16,17 @@ if (fs.existsSync(envPath)) {
 }
 
 const envs = transformEnv();
-const { REGION, SERVICE_NAME, WORKER_FUNCTION_NAME, OSS_BUCKET, ACCOUNT_ID, ACCESS_KEY_ID, ACCESS_KEY_SECRET, SECURITY_TOKEN, GITHUB_REDIRECT_URI, SESSION_EXPIRATION } = envs;
+const { WORKER_FUNCTION_NAME, OSS_BUCKET, GITHUB_REDIRECT_URI, SESSION_EXPIRATION } = envs;
+
+// 获取密钥配置
+const ACCOUNT_ID = envs.ACCOUNT_ID || envs.FC_ACCOUNT_ID;
+const ACCESS_KEY_ID = envs.ACCESS_KEY_ID || envs.ALIBABA_CLOUD_ACCESS_KEY_ID;
+const ACCESS_KEY_SECRET = envs.ACCESS_KEY_SECRET || envs.ALIBABA_CLOUD_ACCESS_KEY_SECRET;
+const SECURITY_TOKEN = envs.SECURITY_TOKEN || (ACCESS_KEY_ID && ACCESS_KEY_ID.startsWith('STS.') ? envs.ALIBABA_CLOUD_SECURITY_TOKEN : undefined);
+
+// 部署的地区信息
+const REGION = envs.REGION || envs.FC_REGION;
+const SERVICE_NAME = envs.SERVICE_NAME || envs.FC_SERVICE_NAME;
 
 // 判断是否支持 github 登陆
 const supportGithubLogin = !!(envs.GITHUB_CLIENT_ID && envs.GITHUB_CLIENT_SECRET);
@@ -28,7 +38,23 @@ const ossConfig = OSS_BUCKET ? { bucket: OSS_BUCKET, region: `oss-${REGION}` } :
 const expiration = SESSION_EXPIRATION ? Number(SESSION_EXPIRATION) : 7 * 24 * 60 * 60 * 1000;
 
 // 将已经组合的字段从配置中删除
-const deleteKeys = ['REGION', 'SERVICE_NAME', 'WORKER_FUNCTION_NAME', 'OSS_BUCKET', 'ACCOUNT_ID', 'ACCESS_KEY_ID', 'ACCESS_KEY_SECRET', 'SECURITY_TOKEN', 'GITHUB_REDIRECT_URI'];
+const deleteKeys = [
+  'REGION',
+  'FC_REGION',
+  'SERVICE_NAME',
+  'FC_SERVICE_NAME',
+  'WORKER_FUNCTION_NAME',
+  'OSS_BUCKET',
+  'ACCOUNT_ID',
+  'ACCESS_KEY_ID',
+  'ACCESS_KEY_SECRET',
+  'SECURITY_TOKEN',
+  'GITHUB_REDIRECT_URI',
+  'FC_ACCOUNT_ID',
+  'ALIBABA_CLOUD_ACCESS_KEY_ID',
+  'ALIBABA_CLOUD_ACCESS_KEY_SECRET',
+  'ALIBABA_CLOUD_SECURITY_TOKEN',
+];
 deleteKeys.forEach(key => delete envs[key]);
 
 module.exports = {
