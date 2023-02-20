@@ -36,7 +36,7 @@ const TASK_STATUS = {
   FAILURE: 'failure',
   CANCEL: 'cancelled',
   RUNNING: 'running',
-  PENING: 'pending',
+  PENDING: 'pending',
   ERROR_WITH_CONTINUE: 'error-with-continue',
   SKIP: 'skipped',
 };
@@ -54,12 +54,13 @@ module.exports = {
   UID_TOKEN_UPPERCASE,
   // 支持的仓库托管平台
   PROVIDER,
-  // 用户在团队的角色
-  ROLE,
   // 数据库表名称
   TABLE,
   // 需要 unset 的字段
   DEFAULT_UNSET_ENVS,
+  // 用户在团队的角色
+  ROLE,
+  ROLE_KEYS: Object.values(ROLE),
   // 团队拥有者字段枚举
   OWNER_ROLE_KEYS: [ROLE.OWNER],
   // 团队管理者字段枚举
@@ -67,7 +68,7 @@ module.exports = {
   // webhook 事件支持
   WEBHOOK_EVENTS: ['push', 'pull_request'],
   // 不验证登陆的路由
-  EXCLUDE_AUTH_URL: ['/', '/auth/login', '/auth/signUp'],
+  EXCLUDE_AUTH_URL: ['/', '/api/auth/login', '/api/auth/signUp', '/api/common/init'],
   // 运行 engine 的函数名称
   WORKER_FUNCTION_NAME: 'worker',
 
