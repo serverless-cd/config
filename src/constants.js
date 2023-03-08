@@ -4,6 +4,7 @@ const ROLE = {
   OWNER: 'owner',
   ADMIN: 'admin',
   MEMBER: 'member',
+  VIEWER: 'viewer',
 };
 
 const PROVIDER = {
@@ -61,10 +62,12 @@ module.exports = {
   // 用户在团队的角色
   ROLE,
   ROLE_KEYS: Object.values(ROLE),
-  // 团队拥有者字段枚举
+  // 身份给整个组织使用
   OWNER_ROLE_KEYS: [ROLE.OWNER],
-  // 团队管理者字段枚举
+  // 组织管理者: 添加/删除成员，删除应用
   ADMIN_ROLE_KEYS: [ROLE.OWNER, ROLE.ADMIN],
+  // 应用管理者: 应用内部相关 部署应用，添加环境
+  MEMBER_ROLE_KEYS: [ROLE.OWNER, ROLE.ADMIN, ROLE.MEMBER],
   // webhook 事件支持
   WEBHOOK_EVENTS: ['push', 'pull_request'],
   // 不验证登陆的路由
