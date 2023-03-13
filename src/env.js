@@ -31,7 +31,7 @@ const SERVICE_NAME = envs.SERVICE_NAME || envs.FC_SERVICE_NAME;
 // 判断是否支持 github 登陆
 const supportGithubLogin = !!(envs.GITHUB_CLIENT_ID && envs.GITHUB_CLIENT_SECRET);
 // github 登陆的授权回调地址
-const redirectUrl = supportGithubLogin ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}` : undefined;
+const redirectUrl = supportGithubLogin ? `https://github.com/login/oauth/authorize?client_id=${envs.GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}` : undefined;
 // 是否存在 oss 配置
 const ossConfig = OSS_BUCKET ? { bucket: OSS_BUCKET, region: `oss-${REGION}` } : undefined;
 // jwt 过期时间
