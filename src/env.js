@@ -31,7 +31,11 @@ const SERVICE_NAME = envs.SERVICE_NAME || envs.FC_SERVICE_NAME;
 // 判断是否支持 github 登陆
 const supportGithubLogin = !!(envs.GITHUB_CLIENT_ID && envs.GITHUB_CLIENT_SECRET);
 // github 登陆的授权回调地址
-const redirectUrl = supportGithubLogin ? `https://github.com/login/oauth/authorize?client_id=${envs.GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}` : undefined;
+const githubRedirectUrl = supportGithubLogin ? `https://github.com/login/oauth/authorize?client_id=${envs.GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}` : undefined;
+// 判断是否支持 gitee 登陆
+const supportGiteeLogin = !!(envs.GITEE_CLIENT_ID && envs.GITEE_CLIENT_SECRET);
+// gitee 登陆的授权回调地址
+const giteeRedirectUrl = supportGiteeLogin ? `https://gitee.com/oauth/authorize?client_id=${envs.GITEE_CLIENT_ID}&redirect_uri=${GITEE_REDIRECT_URI}` : undefined;
 // 是否存在 oss 配置
 const ossConfig = OSS_BUCKET ? { bucket: OSS_BUCKET, region: `oss-${REGION}` } : undefined;
 // jwt 过期时间
@@ -66,7 +70,8 @@ module.exports = {
   ...envs,
   SESSION_EXPIRATION: expiration,
   // 配置
-  GITHUB_REDIRECT_URI: redirectUrl,
+  GITHUB_REDIRECT_URI: githubRedirectUrl,
+  GITEE_REDIRECT_URI: giteeRedirectUrl,
   // 用于和阿里云交互，需要用到的点：重新部署、使用了 OTS、读 TASK
   CREDENTIALS: {
     accountId: ACCOUNT_ID,
