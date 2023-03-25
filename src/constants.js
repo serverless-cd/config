@@ -71,7 +71,7 @@ module.exports = {
   // webhook 事件支持
   WEBHOOK_EVENTS: ['push', 'pull_request'],
   // 不验证登陆的路由
-  EXCLUDE_AUTH_URL: ['/', '/api/auth/login', '/api/auth/signUp', '/api/common/init', '/api/common/webhookTriggered', '/api/auth/callback/github', '/api/auth/callback/gitee', '/api/auth/callback/auth'],
+  EXCLUDE_AUTH_URL: ['/', '/api/auth/login', '/api/auth/signUp', '/api/common/init', '/api/common/webhookTriggered', '/api/auth/callback/github', '/api/auth/callback/gitee', '/api/auth/callback/auth', '/api/auth/updata'],
   // 运行 engine 的函数名称
   WORKER_FUNCTION_NAME: 'worker',
 
