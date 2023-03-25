@@ -16,7 +16,7 @@ if (fs.existsSync(envPath)) {
 }
 
 const envs = transformEnv();
-const { WORKER_FUNCTION_NAME, OSS_BUCKET, GITHUB_REDIRECT_URI, SESSION_EXPIRATION } = envs;
+const { WORKER_FUNCTION_NAME, OSS_BUCKET, GITHUB_REDIRECT_URI, GITEE_REDIRECT_URI, SESSION_EXPIRATION } = envs;
 
 // 获取密钥配置
 const ACCOUNT_ID = envs.ACCOUNT_ID || envs.FC_ACCOUNT_ID;
