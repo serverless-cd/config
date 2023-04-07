@@ -30,6 +30,13 @@ const DEFAULT_UNSET_ENVS = [
   'ACCESS_KEY_SECRET',
   'OSS_BUCKET',
   'REGION',
+  'accessKeyID',
+  'securityToken',
+  'accessKeySecret',
+  'FC_ACCOUNT_ID',
+  'ALIBABA_CLOUD_SECURITY_TOKEN',
+  'ALIBABA_CLOUD_ACCESS_KEY_ID',
+  'ALIBABA_CLOUD_ACCESS_KEY_SECRET',
 ];
 
 const TASK_STATUS = {
